@@ -1,1 +1,1 @@
-# rest-with-spring-boot-and-java-erud
+# rest-with-spring-boot-and-java-erudio
