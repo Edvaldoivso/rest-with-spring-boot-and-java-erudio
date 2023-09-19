@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 public class UnsupportedMathOperationException extends RuntimeException {
 
+	public UnsupportedMathOperationException(String ex) {
+		super(ex);
+	}
+
 	/**
 	 * 
 	 */
