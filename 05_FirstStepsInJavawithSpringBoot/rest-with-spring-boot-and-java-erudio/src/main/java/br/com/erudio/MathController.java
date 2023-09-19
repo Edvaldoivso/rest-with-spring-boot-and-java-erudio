@@ -14,16 +14,39 @@ import br.com.erudio.exeptions.UnsupportedMathOperationException;
 public class MathController {
 
 	private final AtomicLong counter = new AtomicLong();
+	public Double valorCalculado;
 
-	@RequestMapping(value = "/sum/{numberOne}/{numberTwo}", method = RequestMethod.GET)
+	@RequestMapping(value = "/calcular/{numberOne}/{numberTwo}/{op}", method = RequestMethod.GET)
 
-	public Double sum(@PathVariable(value = "numberOne") String numberOne,
-			@PathVariable(value = "numberTwo") String numberTwo
+	public Double calcular(@PathVariable(value = "numberOne") String numberOne,
+			@PathVariable(value = "numberTwo") String numberTwo, @PathVariable(value = "op") String op
 
 	) throws Exception {
 		if (!isNumeric(numberOne) || !isNumeric(numberTwo))
 			throw new UnsupportedMathOperationException("Please set a numeric value!");
-		return convertToDouble(numberOne) + convertToDouble(numberTwo);
+
+		switch (op) {
+		case "sub":
+			valorCalculado = convertToDouble(numberOne) - convertToDouble(numberTwo);
+			break;
+		case "mul":
+			valorCalculado = convertToDouble(numberOne) * convertToDouble(numberTwo);
+			break;
+		case "div":
+			valorCalculado =convertToDouble(numberOne) / convertToDouble(numberTwo);
+			break;
+		case "rq":
+			valorCalculado = Math.sqrt(convertToDouble(numberOne));			
+			break;
+		case "som":
+			valorCalculado = convertToDouble(numberOne) + convertToDouble(numberTwo);
+			break;
+		default:
+			System.out.println("Nenhuma operação valida foi encontrada");
+		}
+
+		return valorCalculado;
+		
 	}
 
 	private Double convertToDouble(String strNumber) {
