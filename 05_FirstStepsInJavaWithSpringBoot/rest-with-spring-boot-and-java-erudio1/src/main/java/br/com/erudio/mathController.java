@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.erudio.exceptions.UnsupportedMathOperationException;
+
 @RestController
 
 public class mathController {
@@ -20,7 +22,7 @@ public class mathController {
 			) throws Exception {
 		
 		if(!isNumeric(numberOne) || !isNumeric(numberTwo)){
-			throw new Exception();
+			throw new UnsupportedMathOperationException("Por favor insira os parametros corretamente");
 		}	
 		
 		return convertToDouble(numberOne)+ convertToDouble(numberTwo);
